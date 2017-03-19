@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="index.css">
+  <title>Semaforo</title>
+</head>
+<style>
+  .Semaforo {
+    border: 1px solid silver;
+    background-color: black;
+    display: inline-block;
+    padding: 1em;
+    border-radius: 10px;
+  }
+
+  .Semaforo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .Semaforo-circle {
+    border-radius: 50%;
+    background-color: silver;
+    height: 50px;
+    width: 50px;
+    margin-bottom: .5em;
+  }
+  .u-background-red {
+    background-color: red;
+  }
+
+  .u-background-yellow {
+    background-color: yellow;
+  }
+
+  .u-background-green {
+    background-color: green;
+  }
+
+  .u-background-transparent {
+    opacity: .3;
+  }
+</style>
+<body>
+  <section class="Semaforo-container">
+    <div class="Semaforo">
+      <div id="circle4" class="Semaforo-circle u-background-red u-background-transparent"></div>
+      <div id="circle5" class="Semaforo-circle u-background-yellow u-background-transparent"></div>
+      <div id="circle6" class="Semaforo-circle u-background-green u-background-transparent"></div>
+    </div>
+  </section>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+  var currentColorB = 0;
+  var circle4 = $('#circle4');
+  var circle5 = $('#circle5');
+  var circle6 = $('#circle6');
+
+  $.getJSON('config.json', function (times) {
+    window.setInterval(function () {
+      if (currentColorB == 2) {
+        circle4.removeClass('u-background-transparent')
+        circle5.addClass('u-background-transparent')
+        circle6.addClass('u-background-transparent')
+      }
+      else if (currentColorB == 1) {
+        circle4.addClass('u-background-transparent')
+        circle5.removeClass('u-background-transparent')
+        circle6.addClass('u-background-transparent')
+      }
+      else {
+        circle4.addClass('u-background-transparent')
+        circle5.addClass('u-background-transparent')
+        circle6.removeClass('u-background-transparent')
+      }
+
+      if (currentColorB === 2) {
+        currentColorB = 0
+      } else {
+        currentColorB = currentColorB + 1
+      }
+    }, times.calleb);
+  })
+
+</script>
+
+
+</html>

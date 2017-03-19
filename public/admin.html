@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Admin</title>
+</head>
+<body>
+  <h1>Seleccione una calle</h1>
+  <a href="/callea">Calle A</a>
+  <a href="/calleb">Calle B</a>
+  <form id="form" action="/config" method="post">
+    <input type="number" name="callea" placeholder="Tiempo Calle A">
+    <input type="number" name="calleb" placeholder="Tiempo Calle B">
+    <button type="submit">Guardar</button>
+  </form>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var $form = $('#form');
+
+  $form.on('submit', function (e) {
+    e.preventDefault();
+    var callea = $('input[name=callea]').val()
+    var calleb = $('input[name=calleb]').val()
+
+    var data = {
+      callea,
+      calleb
+    }
+    console.log(data)
+    $.post('/config', data);
+  })
+  </script>
+</body>
+</html>
